@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>炸弹轨迹模拟器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>炸弹轨迹模拟器</h1>
+
+    <div class="controls">
+        <fieldset>
+            <legend>飞机参数</legend>
+            <div>
+                <label for="altitude">初始高度 (米):</label>
+                <input type="number" id="altitude" value="1000" min="100" max="10000" step="100">
+            </div>
+            <div>
+                <label for="initialSpeed">初始速度 (米/秒):</label>
+                <input type="number" id="initialSpeed" value="200" min="50" max="500" step="10">
+            </div>
+            <div>
+                <label for="flightAngle">飞行角度 (度, 水平为0):</label>
+                <input type="number" id="flightAngle" value="0" min="-90" max="90" step="1">
+            </div>
+            <div>
+                <label for="accelerationType">加速度类型:</label>
+                <select id="accelerationType">
+                    <option value="constant_velocity">匀速</option>
+                    <option value="constant_acceleration">匀加速</option>
+                    <option value="variable_acceleration">变加速 (暂未实现)</option>
+                    <option value="constant_deceleration">匀减速</option>
+                </select>
+            </div>
+            <div>
+                <label for="acceleration">加速度/减速度 (米/秒²):</label>
+                <input type="number" id="acceleration" value="0" min="-20" max="20" step="0.5">
+                <small> (匀速时此项无效, 匀减速时请用负值)</small>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>投弹参数</legend>
+            <div>
+                <label for="dropIntervalType">投弹间隔类型:</label>
+                <select id="dropIntervalType">
+                    <option value="time">按时间间隔</option>
+                    <option value="distance">按距离间隔</option>
+                </select>
+            </div>
+            <div>
+                <label for="dropIntervalValue">投弹间隔值:</label>
+                <input type="number" id="dropIntervalValue" value="5" min="1">
+                <small id="dropIntervalUnit">秒</small>
+            </div>
+             <div>
+                <label for="numberOfBombs">投弹数量:</label>
+                <input type="number" id="numberOfBombs" value="5" min="1" max="20">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>环境参数</legend>
+            <div>
+                <label for="airResistanceType">空气阻力类型:</label>
+                <select id="airResistanceType">
+                    <option value="none">无阻力</option>
+                    <option value="constant">恒定阻力</option>
+                    <option value="proportional_v">与速度成正比</option>
+                    <option value="proportional_v2">与速度平方成正比 (暂未实现)</option>
+                </select>
+            </div>
+            <div>
+                <label for="airResistanceValue">阻力系数/大小:</label>
+                <input type="number" id="airResistanceValue" value="0.1" min="0" step="0.01">
+                 <small>(无阻力时此项无效)</small>
+            </div>
+        </fieldset>
+
+        <button id="startButton">开始模拟</button>
+        <button id="resetButton">重置模拟</button>
+    </div>
+
+    <canvas id="simulationCanvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
